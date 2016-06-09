@@ -1,0 +1,9 @@
+.debhelper/
+.gradle/
+.gradlehome/
+.mh/
+*.log
+*.substvars
+debhelper-build-stamp
+libjsilver-aosp-java/
+files

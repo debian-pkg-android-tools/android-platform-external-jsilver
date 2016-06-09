@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+
+ANDROID_VERSION = $(shell echo $(DEB_VERSION_UPSTREAM) | sed --expression="s/\+r.*//")
+UPSTREAM_TAG = android-$(subst +,_,$(DEB_VERSION_UPSTREAM))
+
+%:
+	dh $@ --buildsystem=gradle --with maven_repo_helper
+
+override_dh_auto_build:
+	dh_auto_build -- assemble --project-prop androidVersion=$(ANDROID_VERSION)
+
+override_mh_install:
+	mh_install
+	rm -r debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/debian
+	rm debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/aosp/jsilver-aosp.jar
+	ln -s ../../../../../../java/jsilver-android-$(ANDROID_VERSION).jar \
+	      debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/aosp/jsilver-aosp.jar
+
+get-orig-source:
+	wget --continue https://android.googlesource.com/platform/external/jsilver/+archive/$(UPSTREAM_TAG).tar.gz

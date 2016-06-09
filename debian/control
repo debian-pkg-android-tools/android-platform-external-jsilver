@@ -1,0 +1,23 @@
+Source: android-platform-external-jsilver
+Section: java
+Priority: optional
+Maintainer: Android Tools Maintainer <android-tools-devel@lists.alioth.debian.org>
+Uploaders: Kai-Chung Yan <seamlikok@gmail.com>
+Build-Depends: debhelper (>= 9),
+               default-jdk,
+               gradle-debian-helper,
+               libguava-java,
+               maven-repo-helper
+Standards-Version: 3.9.8
+Homepage: https://android.googlesource.com/platform/external/jsilver
+Vcs-Git: https://anonscm.debian.org/git/android-tools/android-platform-external-jsilver.git
+Vcs-Browser: https://anonscm.debian.org/cgit/android-tools/android-platform-external-jsilver.git
+
+Package: libjsilver-aosp-java
+Architecture: all
+Depends: libguava-java,
+         ${misc:Depends}
+Description: Pure-Java implementation of Clearsilver
+ This package is a fork of JSilver by The Android Open Source Project. The
+ upstream website has been abandoned by the developers but remains among AOSP's
+ repositories.

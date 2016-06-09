@@ -1,0 +1,2 @@
+build/jsilver.pom --artifact=build/libs/jsilver-*.jar --java-lib --no-usj-versionless
+build/jsilver-aosp.pom --artifact=build/libs/jsilver-*.jar

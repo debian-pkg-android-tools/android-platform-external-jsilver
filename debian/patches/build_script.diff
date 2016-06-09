@@ -1,0 +1,55 @@
+Author: Kai-Chung Yan <seamlikok@gmail.com>
+Last-Update: 2016-06-07
+Description: Prepare the build script
+ This patch modifies build.gradle so that it can be used by Debian's build
+ system. It does the following:
+   * Set artifactId, groupId and version
+   * Specify offline dependencies
+   * Generate POMs
+--- a/build.gradle
++++ b/build.gradle
+@@ -1,4 +1,9 @@
+ apply plugin: 'java'
++apply plugin: 'maven'
++
++archivesBaseName = 'jsilver'
++group = 'com.google.jsilver'
++version = "android-$androidVersion"
+ 
+ sourceSets {
+     main {
+@@ -13,6 +18,32 @@
+     }
+ }
+ 
++repositories {
++    maven { url 'file:///usr/share/maven-repo' }
++}
++
+ dependencies {
+-    compile project(':guava')
++    compile 'com.google.guava:guava:debian'
+ }
++
++task poms {
++    outputs.files "${buildDir}/${archivesBaseName}.pom"
++    doFirst {
++        mkdir "$buildDir"
++        pom {
++            project { artifactId archivesBaseName }
++        }.writeTo("${buildDir}/${project.archivesBaseName}.pom")
++        pom {
++            project {
++                artifactId archivesBaseName
++                version 'aosp'
++            }
++        }.writeTo("${buildDir}/${project.archivesBaseName}-aosp.pom")
++    }
++}
++
++clean.doLast {
++    delete "${buildDir}/${project.archivesBaseName}.pom"
++}
++
++assemble.dependsOn ':poms'
+\ No newline at end of file
