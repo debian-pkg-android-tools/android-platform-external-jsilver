@@ -8,48 +8,23 @@ Description: Prepare the build script
    * Generate POMs
 --- a/build.gradle
 +++ b/build.gradle
-@@ -1,4 +1,9 @@
+@@ -1,5 +1,9 @@
  apply plugin: 'java'
-+apply plugin: 'maven'
-+
+ 
 +archivesBaseName = 'jsilver'
 +group = 'com.google.jsilver'
 +version = "android-$androidVersion"
- 
++
  sourceSets {
      main {
-@@ -13,6 +18,32 @@
-     }
+         java {
+@@ -14,5 +18,7 @@
  }
  
-+repositories {
-+    maven { url 'file:///usr/share/maven-repo' }
-+}
-+
  dependencies {
 -    compile project(':guava')
 +    compile 'com.google.guava:guava:debian'
  }
 +
-+task poms {
-+    outputs.files "${buildDir}/${archivesBaseName}.pom"
-+    doFirst {
-+        mkdir "$buildDir"
-+        pom {
-+            project { artifactId archivesBaseName }
-+        }.writeTo("${buildDir}/${project.archivesBaseName}.pom")
-+        pom {
-+            project {
-+                artifactId archivesBaseName
-+                version 'aosp'
-+            }
-+        }.writeTo("${buildDir}/${project.archivesBaseName}-aosp.pom")
-+    }
-+}
-+
-+clean.doLast {
-+    delete "${buildDir}/${project.archivesBaseName}.pom"
-+}
-+
-+assemble.dependsOn ':poms'
++apply from: 'debian/generatePom.gradle'
 \ No newline at end of file
