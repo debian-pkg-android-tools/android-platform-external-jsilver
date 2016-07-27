@@ -9,11 +9,5 @@ task generatePom {
     pom {
       project { artifactId archivesBaseName }
     }.writeTo("${buildDir}/${project.archivesBaseName}.pom")
-    pom {
-      project {
-        artifactId archivesBaseName
-        version 'aosp'
-      }
-    }.writeTo("${buildDir}/${project.archivesBaseName}-aosp.pom")
   }
 }

@@ -17,6 +17,8 @@ Package: libjsilver-aosp-java
 Architecture: all
 Depends: libguava-java,
          ${misc:Depends}
+Breaks: libjsilver-java
+Replaces: libjsilver-java
 Description: Pure-Java implementation of Clearsilver
  This package is a fork of JSilver by The Android Open Source Project. The
  upstream website has been abandoned by the developers but remains among AOSP's

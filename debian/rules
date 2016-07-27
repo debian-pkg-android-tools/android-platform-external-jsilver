@@ -11,12 +11,5 @@ UPSTREAM_TAG = android-$(subst +,_,$(DEB_VERSION_UPSTREAM))
 override_dh_auto_build:
 	dh_auto_build -- assemble --project-prop androidVersion=$(ANDROID_VERSION)
 
-override_mh_install:
-	mh_install
-	rm -r debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/debian
-	rm debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/aosp/jsilver-aosp.jar
-	ln -s ../../../../../../java/jsilver-android-$(ANDROID_VERSION).jar \
-	      debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/aosp/jsilver-aosp.jar
-
 get-orig-source:
 	uscan --download-current-version --force-download --rename
