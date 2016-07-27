@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
 Uploaders: Kai-Chung Yan <seamlikok@gmail.com>
 Build-Depends: debhelper (>= 9),
-               default-jdk,
+               default-jdk-headless | default-jdk,
                gradle-debian-helper,
                libguava-java,
                maven-repo-helper
