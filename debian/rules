@@ -19,4 +19,4 @@ override_mh_install:
 	      debian/libjsilver-aosp-java/usr/share/maven-repo/com/google/jsilver/jsilver/aosp/jsilver-aosp.jar
 
 get-orig-source:
-	wget --continue https://android.googlesource.com/platform/external/jsilver/+archive/$(UPSTREAM_TAG).tar.gz
+	uscan --download-current-version --force-download --rename
