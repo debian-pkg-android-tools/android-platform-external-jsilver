@@ -6,19 +6,22 @@ Description: Prepare the build script
    * Set artifactId, groupId and version
    * Specify offline dependencies
    * Generate POMs
+   * Set Java version to 1.6
 --- a/build.gradle
 +++ b/build.gradle
-@@ -1,5 +1,9 @@
+@@ -1,5 +1,11 @@
  apply plugin: 'java'
  
 +archivesBaseName = 'jsilver'
 +group = 'com.google.jsilver'
 +version = "android-$androidVersion"
++sourceCompatibility = 1.6
++targetCompatibility = 1.6
 +
  sourceSets {
      main {
          java {
-@@ -14,5 +18,7 @@
+@@ -14,5 +20,7 @@
  }
  
  dependencies {
