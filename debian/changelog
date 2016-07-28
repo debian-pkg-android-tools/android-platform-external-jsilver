@@ -1,4 +1,4 @@
-android-platform-external-jsilver (6.0.1+r55-1) UNRELEASED; urgency=medium
+android-platform-external-jsilver (6.0.1+r55-1) unstable; urgency=medium
 
   [ Kai-Chung Yan ]
   * Initial release (Closes: #832590)
